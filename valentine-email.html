@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff4b6c;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .btn-yes {
+            background: #ff4b6c;
+            color: white;
+        }
+        .btn-no {
+            background: #f0f0f0;
+            color: #666;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .heart {
+            position: fixed;
+            animation: floatHeart 4s ease-in infinite;
+            z-index: 1;
+            font-size: 24px;
+            pointer-events: none;
+        }
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+        .success-message {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Dearest boobooo</h1>
+        <p>Every moment with you feels like a beautiful dream. Your messages make my eyes shimmer, and your presence in my life makes everything complete.</p>
+        <p>Will you be my Valentine?</p>
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="sayYes()">Yes!</button>
+            <button class="btn btn-no" onmouseover="moveButton(this)">No</button>
+        </div>
+    </div>
+
+    <script>
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+            
+            heart.addEventListener('animationend', () => heart.remove());
+        }
+
+        function sayYes() {
+            document.querySelector('.card').innerHTML = `
+                <div class="success-message">
+                    <h1>Yay! ❤️</h1>
+                    <p>I knew you'd say yes! You make every moment special.</p>
+                    <p>Your Eternal Parwaana,<br>Sajal</p>
+                </div>
+            `;
+            
+            // Start creating hearts
+            setInterval(createHeart, 300);
+        }
+    </script>
+</body>
+</html>
